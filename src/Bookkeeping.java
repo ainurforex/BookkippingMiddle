@@ -56,7 +56,6 @@ public class Bookkeeping {
         String listOfEmployees = "";
 
         for (int i = 0; i < employees.length; i++) {
-
             if (employees[i] != null) {
                 listOfEmployees += employees[i].getFullName() + "\n";
             }
@@ -73,7 +72,6 @@ public class Bookkeeping {
         String listOfEmployeesInDepartment = "";
 
         for (int i = 0; i < employees.length; i++) {
-
             if (employees[i] != null && employees[i].getDepartment() == department) {
                 listOfEmployeesInDepartment += employees[i].getId() + ", " + employees[i].getFullName() + ", " + employees[i].getSalary() + "\n";
             }
@@ -124,11 +122,9 @@ public class Bookkeeping {
         int indexEmployeesMinSalary = firstEnterInBase;
 
         for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                if (employees[i].getSalary() < minSalary) {
-                    minSalary = employees[i].getSalary();
-                    indexEmployeesMinSalary = i;
-                }
+            if (employees[i] != null && employees[i].getSalary() < minSalary) {
+                minSalary = employees[i].getSalary();
+                indexEmployeesMinSalary = i;
             }
         }
 
@@ -145,12 +141,11 @@ public class Bookkeeping {
         int indexEmployeesMinSalary = firstEnterInBaseDepartment;
 
         for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getDepartment() == department) {
-                if (employees[i].getSalary() < minSalary) {
-                    minSalary = employees[i].getSalary();
-                    indexEmployeesMinSalary = i;
-                }
+            if (employees[i] != null && employees[i].getDepartment() == department && employees[i].getSalary() < minSalary) {
+                minSalary = employees[i].getSalary();
+                indexEmployeesMinSalary = i;
             }
+
         }
 
         return employees[indexEmployeesMinSalary].getFullName();
@@ -165,11 +160,9 @@ public class Bookkeeping {
         int indexEmployeesMaxSalary = firstEnterInBase;
 
         for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                if (employees[i].getSalary() > maxSalary) {
-                    maxSalary = employees[i].getSalary();
-                    indexEmployeesMaxSalary = i;
-                }
+            if (employees[i] != null && employees[i].getSalary() > maxSalary) {
+                maxSalary = employees[i].getSalary();
+                indexEmployeesMaxSalary = i;
             }
         }
 
@@ -186,12 +179,11 @@ public class Bookkeeping {
         int indexEmployeesMaxSalary = firstEnterInBaseDepartment;
 
         for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getDepartment() == department) {
-                if (employees[i].getSalary() > maxSalary) {
-                    maxSalary = employees[i].getSalary();
-                    indexEmployeesMaxSalary = i;
-                }
+            if (employees[i] != null && employees[i].getDepartment() == department && employees[i].getSalary() > maxSalary) {
+                maxSalary = employees[i].getSalary();
+                indexEmployeesMaxSalary = i;
             }
+
         }
 
         return employees[indexEmployeesMaxSalary].getFullName();
@@ -262,7 +254,6 @@ public class Bookkeeping {
         String listOfLessSalary = "";
 
         for (int i = 0; i < employees.length; i++) {
-
             if (employees[i] != null && employees[i].getSalary() < lessSalary) {
                 listOfLessSalary += employees[i].getId() + ", " + employees[i].getFullName() + ", " + employees[i].getSalary() + "\n";
             }
@@ -309,6 +300,7 @@ public class Bookkeeping {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -319,6 +311,7 @@ public class Bookkeeping {
                 return i;
             }
         }
+
         return -1;
     }
 
