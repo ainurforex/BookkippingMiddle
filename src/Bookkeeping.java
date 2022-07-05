@@ -3,7 +3,7 @@ public class Bookkeeping {
         Employee[] employeeBook = new Employee[10];
         employeeBook[0] = new Employee("Петров", "Иван", "Сидорович", 1, 1000);
         employeeBook[1] = new Employee("Нечаев", "Петр", "Васильевич", 1, 2000);
-        employeeBook[2] = new Employee("Сидоров", "Василий", "Петрович", 1, 3000);
+        employeeBook[2] = new Employee("Сидоров", "Василий", "Петрович", 1, 5000);
         employeeBook[3] = new Employee("Бекетова", "Анна", "Васильевнв", 2, 50000);
         employeeBook[4] = new Employee("Зарев", "Михаил", "Артурович", 2, 8000);
         employeeBook[5] = new Employee("Пушкин", "Александр", "Сергеевич", 3, 70000);
