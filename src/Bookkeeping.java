@@ -1,33 +1,33 @@
 public class Bookkeeping {
     public static void main(String[] args) {
-        Employee[] employeeBase = new Employee[10];
-        employeeBase[0] = new Employee("Петров", "Иван", "Сидорович", 1, 1000);
-        employeeBase[1] = new Employee("Нечаев", "Петр", "Васильевич", 1, 2000);
-        employeeBase[2] = new Employee("Сидоров", "Василий", "Петрович", 1, 3000);
-        employeeBase[3] = new Employee("Бекетова", "Анна", "Васильевнв", 2, 50000);
-        employeeBase[4] = new Employee("Зарев", "Михаил", "Артурович", 2, 8000);
-        employeeBase[5] = new Employee("Пушкин", "Александр", "Сергеевич", 3, 70000);
-        employeeBase[6] = new Employee("Сиськин", "Гиви", "Карэнович", 3, 75000);
-        employeeBase[7] = new Employee("Могелева", "Кристина", "Андреевна", 4, 25000);
+        Employee[] employeeBook = new Employee[10];
+        employeeBook[0] = new Employee("Петров", "Иван", "Сидорович", 1, 1000);
+        employeeBook[1] = new Employee("Нечаев", "Петр", "Васильевич", 1, 2000);
+        employeeBook[2] = new Employee("Сидоров", "Василий", "Петрович", 1, 3000);
+        employeeBook[3] = new Employee("Бекетова", "Анна", "Васильевнв", 2, 50000);
+        employeeBook[4] = new Employee("Зарев", "Михаил", "Артурович", 2, 8000);
+        employeeBook[5] = new Employee("Пушкин", "Александр", "Сергеевич", 3, 70000);
+        employeeBook[6] = new Employee("Сиськин", "Гиви", "Карэнович", 3, 75000);
+        employeeBook[7] = new Employee("Могелева", "Кристина", "Андреевна", 4, 25000);
 
 
-        System.out.println(dataOfEmployees(employeeBase));
-        indexingSalaryAllEmployee(employeeBase, 50);
-        System.out.println(dataOfEmployees(employeeBase));
+        System.out.println(dataOfEmployees(employeeBook));
+        indexingSalaryAllEmployee(employeeBook, 50);
+        System.out.println(dataOfEmployees(employeeBook));
         System.out.println();
-        System.out.println(findEmployeesMinSalaryInDepartment(employeeBase, 1));
-        System.out.println(findEmployeesMaxSalaryInDepartment(employeeBase, 1));
+        System.out.println(findEmployeesMinSalaryInDepartment(employeeBook, 1));
+        System.out.println(findEmployeesMaxSalaryInDepartment(employeeBook, 1));
         System.out.println();
-        System.out.println(summSalaryInDepartment(employeeBase, 1));
+        System.out.println(summSalaryInDepartment(employeeBook, 1));
         System.out.println();
-        System.out.println(avarageSalaryInDepartment(employeeBase, 1));
+        System.out.println(avarageSalaryInDepartment(employeeBook, 1));
         System.out.println();
-        System.out.println(listOfEmployeesInDepartment(employeeBase, 2));
-        indexingSalaryAllEmployeeInDepartment(employeeBase, 50, 2);
-        System.out.println(listOfEmployeesInDepartment(employeeBase, 2));
+        System.out.println(listOfEmployeesInDepartment(employeeBook, 2));
+        indexingSalaryAllEmployeeInDepartment(employeeBook, 50, 2);
+        System.out.println(listOfEmployeesInDepartment(employeeBook, 2));
         System.out.println();
-        System.out.println(listOfLessSalary(employeeBase, 50000));
-        System.out.println(listOfMoreSalary(employeeBase, 50000));
+        System.out.println(listOfLessSalary(employeeBook, 50000));
+        System.out.println(listOfMoreSalary(employeeBook, 50000));
     }
 
 
@@ -68,15 +68,15 @@ public class Bookkeeping {
 
 
     private static String listOfEmployeesInDepartment(Employee[] employees, int department) {
-        int firstEnterInBase = firstEnterInBase(employees);
-        if (firstEnterInBase == -1) {
+        int firstEnterInBaseDepartment = firstEnterInBaseDepartment(employees, department);
+        if (firstEnterInBaseDepartment == -1) {
             return "None";
         }
         String listOfEmployeesInDepartment = "";
 
-        for (int i = firstEnterInBase; i < employees.length; i++) {
+        for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
-                listOfEmployeesInDepartment += employees[i].getId() + ", " + employees[i].getFullName() +
+                listOfEmployeesInDepartment += "id " + employees[i].getId() + ", " + employees[i].getFullName() +
                         ", " + employees[i].getSalary() + "\n";
             }
         }
@@ -276,8 +276,8 @@ public class Bookkeeping {
 
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() < lessSalary) {
-                listOfLessSalary += employees[i].getId() + ", " + employees[i].getFullName() +
-                        ", " + employees[i].getSalary() + "\n";
+                listOfLessSalary += "id " + employees[i].getId() + ", Ф.И.О." + employees[i].getFullName() +
+                        ", зарплата " + employees[i].getSalary() + "\n";
             }
         }
 
@@ -296,8 +296,8 @@ public class Bookkeeping {
         for (int i = 0; i < employees.length; i++) {
 
             if (employees[i] != null && employees[i].getSalary() >= moreSalary) {
-                listOfMoreSalary += employees[i].getId() + ", " + employees[i].getFullName() +
-                        ", " + employees[i].getSalary() + "\n";
+                listOfMoreSalary += "id " + employees[i].getId() + ", Ф.И.О." + employees[i].getFullName() +
+                        ", зарплата " + employees[i].getSalary() + "\n";
             }
         }
 
@@ -311,7 +311,7 @@ public class Bookkeeping {
                 return i;
             }
         }
-
+        System.out.println("Запись в базе отсутствует.");
         return -1;
     }
 
@@ -322,7 +322,7 @@ public class Bookkeeping {
                 return i;
             }
         }
-
+        System.out.println("Запись в базе отсутствует.");
         return -1;
     }
 
