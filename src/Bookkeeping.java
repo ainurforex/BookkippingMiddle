@@ -23,7 +23,7 @@ public class Bookkeeping {
         System.out.println(avarageSalaryInDepartment(employeeBase, 1));
         System.out.println();
         System.out.println(listOfEmployeesInDepartment(employeeBase, 2));
-        indexingSalaryAllEmployeeInDepartment(employeeBase, 100, 2);
+        indexingSalaryAllEmployeeInDepartment(employeeBase, 50, 2);
         System.out.println(listOfEmployeesInDepartment(employeeBase, 2));
         System.out.println();
         System.out.println(listOfLessSalary(employeeBase, 50000));
@@ -32,13 +32,14 @@ public class Bookkeeping {
 
 
     private static String dataOfEmployees(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
 
         String dataOfEmployees = "";
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBase; i < employees.length; i++) {
             if (employees[i] != null) {
                 dataOfEmployees += employees[i] + "\n";
             }
@@ -49,13 +50,14 @@ public class Bookkeeping {
 
 
     private static String listOfEmployees(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
 
         String listOfEmployees = "";
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBase; i < employees.length; i++) {
             if (employees[i] != null) {
                 listOfEmployees += employees[i].getFullName() + "\n";
             }
@@ -64,30 +66,34 @@ public class Bookkeeping {
         return listOfEmployees;
     }
 
+
     private static String listOfEmployeesInDepartment(Employee[] employees, int department) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
-
         String listOfEmployeesInDepartment = "";
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBase; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
-                listOfEmployeesInDepartment += employees[i].getId() + ", " + employees[i].getFullName() + ", " + employees[i].getSalary() + "\n";
+                listOfEmployeesInDepartment += employees[i].getId() + ", " + employees[i].getFullName() +
+                        ", " + employees[i].getSalary() + "\n";
             }
         }
 
         return listOfEmployeesInDepartment;
     }
 
+
     private static int summSalary(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return 0;
         }
 
         int summSalary = 0;
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBase; i < employees.length; i++) {
             if (employees[i] != null) {
                 summSalary += employees[i].getSalary();
             }
@@ -96,14 +102,16 @@ public class Bookkeeping {
         return summSalary;
     }
 
+
     private static int summSalaryInDepartment(Employee[] employees, int department) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBaseDepartment = firstEnterInBaseDepartment(employees, department);
+        if (firstEnterInBaseDepartment == -1) {
             return 0;
         }
 
         int summSalary = 0;
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
                 summSalary += employees[i].getSalary();
             }
@@ -112,12 +120,13 @@ public class Bookkeeping {
         return summSalary;
     }
 
+
     private static String findEmployeesMinSalary(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
 
-        int firstEnterInBase = firstEnterInBase(employees);
         int minSalary = employees[firstEnterInBase].getSalary();
         int indexEmployeesMinSalary = firstEnterInBase;
 
@@ -126,10 +135,12 @@ public class Bookkeeping {
                 minSalary = employees[i].getSalary();
                 indexEmployeesMinSalary = i;
             }
+
         }
 
         return employees[indexEmployeesMinSalary].getFullName();
     }
+
 
     private static String findEmployeesMinSalaryInDepartment(Employee[] employees, int department) {
         int firstEnterInBaseDepartment = firstEnterInBaseDepartment(employees, department);
@@ -141,7 +152,8 @@ public class Bookkeeping {
         int indexEmployeesMinSalary = firstEnterInBaseDepartment;
 
         for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getDepartment() == department && employees[i].getSalary() < minSalary) {
+            if (employees[i] != null && employees[i].getDepartment() == department &&
+                    employees[i].getSalary() < minSalary) {
                 minSalary = employees[i].getSalary();
                 indexEmployeesMinSalary = i;
             }
@@ -151,11 +163,12 @@ public class Bookkeeping {
         return employees[indexEmployeesMinSalary].getFullName();
     }
 
+
     private static String findEmployeesMaxSalary(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
-        int firstEnterInBase = firstEnterInBase(employees);
         int maxSalary = employees[firstEnterInBase].getSalary();
         int indexEmployeesMaxSalary = firstEnterInBase;
 
@@ -164,10 +177,12 @@ public class Bookkeeping {
                 maxSalary = employees[i].getSalary();
                 indexEmployeesMaxSalary = i;
             }
+
         }
 
         return employees[indexEmployeesMaxSalary].getFullName();
     }
+
 
     private static String findEmployeesMaxSalaryInDepartment(Employee[] employees, int department) {
         int firstEnterInBaseDepartment = firstEnterInBaseDepartment(employees, department);
@@ -179,7 +194,8 @@ public class Bookkeeping {
         int indexEmployeesMaxSalary = firstEnterInBaseDepartment;
 
         for (int i = firstEnterInBaseDepartment; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getDepartment() == department && employees[i].getSalary() > maxSalary) {
+            if (employees[i] != null && employees[i].getDepartment() == department &&
+                    employees[i].getSalary() > maxSalary) {
                 maxSalary = employees[i].getSalary();
                 indexEmployeesMaxSalary = i;
             }
@@ -189,15 +205,17 @@ public class Bookkeeping {
         return employees[indexEmployeesMaxSalary].getFullName();
     }
 
+
     private static int avarageSalary(Employee[] employees) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return 0;
         }
 
         int countEmployees = 0;
         int summSalary = summSalary(employees);
 
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = firstEnterInBase; i < employees.length; i++) {
             if (employees[i] != null) {
                 countEmployees++;
             }
@@ -206,13 +224,15 @@ public class Bookkeeping {
         return Math.round(summSalary / countEmployees);
     }
 
-    private static int avarageSalaryInDepartment(Employee[] employees, int department) {
 
-        int countEmployees = 0;
+    private static int avarageSalaryInDepartment(Employee[] employees, int department) {
         int summSalaryInDepartment = summSalaryInDepartment(employees, department);
         if (summSalaryInDepartment == 0) {
             return 0;
         }
+
+        int countEmployees = 0;
+
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
                 countEmployees++;
@@ -222,32 +242,33 @@ public class Bookkeeping {
         return Math.round(summSalaryInDepartment / countEmployees);
     }
 
-    private static void indexingSalaryEmployee(Employee employee, int percentIndex) {
+
+    private static void indexingSalaryEmployee(Employee employee, int percent) {
         if (employee != null) {
-            employee.setSalary((employee.getSalary() * percentIndex / 100) + employee.getSalary());
+            employee.setSalary((employee.getSalary() * percent / 100) + employee.getSalary());
         }
     }
 
-    private static void indexingSalaryAllEmployee(Employee[] employees, int percentIndex) {
 
+    private static void indexingSalaryAllEmployee(Employee[] employees, int percent) {
         for (int i = 0; i < employees.length; i++) {
-            indexingSalaryEmployee(employees[i], percentIndex);
+            indexingSalaryEmployee(employees[i], percent);
         }
     }
 
 
-    private static void indexingSalaryAllEmployeeInDepartment(Employee[] employees, int percentIndex, int department) {
-
+    private static void indexingSalaryAllEmployeeInDepartment(Employee[] employees, int percent, int department) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
-                indexingSalaryEmployee(employees[i], percentIndex);
+                indexingSalaryEmployee(employees[i], percent);
             }
         }
     }
 
 
     private static String listOfLessSalary(Employee[] employees, int lessSalary) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
 
@@ -255,15 +276,18 @@ public class Bookkeeping {
 
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() < lessSalary) {
-                listOfLessSalary += employees[i].getId() + ", " + employees[i].getFullName() + ", " + employees[i].getSalary() + "\n";
+                listOfLessSalary += employees[i].getId() + ", " + employees[i].getFullName() +
+                        ", " + employees[i].getSalary() + "\n";
             }
         }
 
         return listOfLessSalary;
     }
 
+
     private static String listOfMoreSalary(Employee[] employees, int moreSalary) {
-        if (isEmptyBase(employees)) {
+        int firstEnterInBase = firstEnterInBase(employees);
+        if (firstEnterInBase == -1) {
             return "None";
         }
 
@@ -271,30 +295,17 @@ public class Bookkeeping {
 
         for (int i = 0; i < employees.length; i++) {
 
-            if (employees[i] != null && employees[i].getSalary() > moreSalary) {
-                listOfMoreSalary += employees[i].getId() + ", " + employees[i].getFullName() + ", " + employees[i].getSalary() + "\n";
+            if (employees[i] != null && employees[i].getSalary() >= moreSalary) {
+                listOfMoreSalary += employees[i].getId() + ", " + employees[i].getFullName() +
+                        ", " + employees[i].getSalary() + "\n";
             }
         }
 
         return listOfMoreSalary;
     }
 
-    private static boolean isEmptyBase(Employee[] employees) {
-        int countEmployees = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                countEmployees++;
-            }
-        }
-        if (countEmployees == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     private static int firstEnterInBase(Employee[] employees) {
-
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 return i;
@@ -304,8 +315,8 @@ public class Bookkeeping {
         return -1;
     }
 
-    private static int firstEnterInBaseDepartment(Employee[] employees, int department) {
 
+    private static int firstEnterInBaseDepartment(Employee[] employees, int department) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getDepartment() == department) {
                 return i;
